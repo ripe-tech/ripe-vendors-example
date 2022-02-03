@@ -1,2 +1,3 @@
-# ripe-vendors-example
-Simple example repository to be used as skeleton
+# RIPE Vendors Example
+
+Simple example repository to be used as skeleton.
