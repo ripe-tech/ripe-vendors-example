@@ -27,8 +27,11 @@
 
 <script>
 
+import { logicMixin } from "./logic";
+
 export const ExamplePersonalization = {
     extends: global.RipeCommonsPersonalizationForm.Interface,
+    mixins: [logicMixin],
     data: function() {
         return {
             initialsExtra: {},
@@ -104,6 +107,7 @@ export const ExamplePersonalization = {
     created: async function() {
         if (this.form) {
             await this.$store.dispatch("refreshInitialsData");
+            this.$refs.form.setup();
         }
     },
     methods: {

@@ -1,12 +1,6 @@
 <template>
     <div class="form-example">
-        <div class="" v-for="(group, index) in groups" v-bind:key="group">
-            <input-ripe
-                class="input-initials"
-                v-bind:value.sync="initialsText[group]"
-                v-bind:max-length="initialsMaximumCharacters"
-                v-on:update:value="value => onInput(group, value)"
-            />
+        <div class="group" v-for="group in groups" v-bind:key="group">
             <form-input
                 class="form-initials"
                 v-bind:header="'Text'"
@@ -15,7 +9,7 @@
                 <input-ripe
                     class="input-initials"
                     v-bind:value.sync="initialsText[group]"
-                    v-bind:max-length="maxInitials[group]"
+                    v-bind:max-length="initialsMaximumCharacters"
                     v-on:update:value="value => onInput(group, value)"
                 />
             </form-input>
@@ -28,15 +22,9 @@
                 >
                     <div class="select-icon">
                         <select-ripe
-                            v-bind:class="classesSelect(group, type)"
                             v-bind:options="options"
                             v-bind:value="propertiesData[group][type]"
                             v-on:update:value="value => onPropertiesUpdate(group, type, value)"
-                        />
-                        <icon
-                            v-bind:color="'#929292'"
-                            v-bind:icon="'chevron-down'"
-                            v-bind:width="20"
                         />
                     </div>
                 </form-input>
@@ -46,30 +34,30 @@
 </template>
 
 <style scoped>
-.form-example > .groups {
+.form-example{
     display: flex;
     flex-direction: row;
 }
 
-body.mobile .form-example > .groups {
+body.mobile .form-example {
     flex-direction: column;
 }
 
-.form-example > .groups > .initials-group {
-    width: 370px;
+.form-example > .group {
+    width: 100%;
 }
 
-body.mobile .form-example > .groups > .initials-group {
-    width: unset;
-}
-
-.form-example > .groups > .initials-group:first-child:not(:last-child) {
+.form-example > .group:first-child:not(:last-child) {
     margin-right: 20px;
 }
 
-body.mobile .form-example > .groups > .initials-group:first-child:not(:last-child) {
+body.mobile .form-example > .group:first-child:not(:last-child) {
     margin-right: 0px;
 }  
+
+.form-example > .group > .properties-selection > .form-input {
+    margin-top: 20px;
+}
 </style>
 
 <script>
@@ -93,8 +81,7 @@ export const formExample = {
             return this.groups ? this.groups[0] : null;
         },
         groups() {
-            if (!this.initialsGroups) return null;
-            return this.initialsGroups[0];
+            return this.initialsGroups || null;
         },
         configInitials() {
             return this.$store.state.config?.initials || {};
