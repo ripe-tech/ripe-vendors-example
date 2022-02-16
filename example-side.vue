@@ -1,6 +1,7 @@
 <template>
     <div class="example-side">
-        HELLO WORLD
+        <h1>{{ __getLocale("hello_world") }}</h1>
+        <example-picker v-bind:parts="pickerParts" />
     </div>
 </template>
 
@@ -12,9 +13,15 @@
 
 <script>
 import LocaleMap from "./locale.json";
+import ExamplePicker from "./example-picker.vue";
+import { logicMixin } from "./logic";
 
 export const ExampleSide = {
     name: "example-side",
+    components: {
+        "example-picker": ExamplePicker
+    },
+    mixins: [logicMixin],
     data: function() {
         return {
             initialsExtra: {}
@@ -29,6 +36,9 @@ export const ExampleSide = {
         },
         options() {
             return this.$store.state.options;
+        },
+        pickerParts() {
+            return Object.keys(this.options);
         }
     },
     watch: {
