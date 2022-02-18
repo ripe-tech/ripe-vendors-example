@@ -1,8 +1,13 @@
 <template>
     <div class="example-picker">
         <div class="picker" v-for="part in pickerItems" v-bind:key="part.name">
-            <div class="color">
-                {{ getPartColor(part.name) }}
+            <div class="title">
+                <div class="title-part">
+                    {{ locale(part.name) }}:
+                </div>
+                <div class="title-color">
+                    {{ getPartColor(part.name) }}
+                </div>
             </div>
             <button-group-swatch
                 v-bind:variant="'thin'"
@@ -19,8 +24,24 @@
     margin-top: 20px;
 }
 
-.example-picker .color {
+.example-picker .title {
+    color: #151515;
+    display: flex;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    padding-right: 10px;
+    text-transform: uppercase;
+}
+
+.example-picker .title > .title-part {
     font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.example-picker .title > .title-color {
+    margin-left: 5px;
 }
 
 .example-picker ::v-deep .button-group-swatch.thin .swatch > .swatch-image {
