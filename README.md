@@ -8,6 +8,7 @@ Simple example repository to be used as skeleton.
 - Run `npm install`
 - Find and replace the word `example` in the whole project by the brand name in lowercase. Ex: `swear`
 - Find and replace the word `Example` in the whole project by the brand name capitalized. Ex: `Swear`
+- Rename all the files that have `example` to the brand's name
 - Run `npm link`
 
 **In `ripe-white`**
