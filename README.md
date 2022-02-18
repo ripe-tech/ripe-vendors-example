@@ -24,3 +24,6 @@ Simple example repository to be used as skeleton.
 
 **In `ripe-white`**
 - Run `npm run dev`
+
+**In the browser**
+- Use `features=<brand-side>`
