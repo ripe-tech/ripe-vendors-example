@@ -65,7 +65,6 @@ body.mobile .example-picker ::v-deep .button-group-swatch.thin .swatch {
 </style>
 
 <script>
-
 export const ExamplePicker = {
     name: "example-picker",
     props: {

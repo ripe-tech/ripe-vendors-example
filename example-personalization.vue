@@ -26,7 +26,6 @@
 </style>
 
 <script>
-
 import { logicMixin } from "./logic";
 
 export const ExamplePersonalization = {
@@ -121,12 +120,10 @@ export const ExamplePersonalization = {
             return this.state;
         },
         getTabMessage() {
-            return (
-                this.groups
-                    .map(group => this.initialsExtra?.[group]?.initials || "")
-                    .join(" ")
-                    .trim()
-            );
+            return this.groups
+                .map(group => this.initialsExtra?.[group]?.initials || "")
+                .join(" ")
+                .trim();
         },
         onValid(value) {
             this.valid = value;

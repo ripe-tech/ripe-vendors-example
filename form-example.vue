@@ -1,11 +1,7 @@
 <template>
     <div class="form-example">
         <div class="group" v-for="group in groups" v-bind:key="group">
-            <form-input
-                class="form-initials"
-                v-bind:header="'Text'"
-                v-bind:header-size="'large'"
-            >
+            <form-input class="form-initials" v-bind:header="'Text'" v-bind:header-size="'large'">
                 <input-ripe
                     class="input-initials"
                     v-bind:value.sync="initialsText[group]"
@@ -34,7 +30,7 @@
 </template>
 
 <style scoped>
-.form-example{
+.form-example {
     display: flex;
     flex-direction: row;
 }
@@ -53,7 +49,7 @@ body.mobile .form-example {
 
 body.mobile .form-example > .group:first-child:not(:last-child) {
     margin-right: 0px;
-}  
+}
 
 .form-example > .group > .properties-selection > .form-input {
     margin-top: 20px;
@@ -61,7 +57,6 @@ body.mobile .form-example > .group:first-child:not(:last-child) {
 </style>
 
 <script>
-
 export const formExample = {
     props: {
         initialsExtra: {
@@ -107,7 +102,10 @@ export const formExample = {
             let valid = true;
             Object.entries(this.initialsExtra).forEach(([group, initialsExtra]) => {
                 const initialsLength = initialsExtra.initials.length;
-                if (initialsLength < this.initialsMinimumCharacters || initialsLength > this.initialsMinimumCharacters) {
+                if (
+                    initialsLength < this.initialsMinimumCharacters ||
+                    initialsLength > this.initialsMinimumCharacters
+                ) {
                     valid = false;
                 }
             });
@@ -177,7 +175,7 @@ export const formExample = {
         propertiesDataToEngraving(group = null) {
             group = group || Object.keys(this.propertiesData)[0];
             if (!group || !this.propertiesData[group]) return null;
-            let propertyProfiles = Object.entries(this.propertiesData[group])
+            const propertyProfiles = Object.entries(this.propertiesData[group])
                 .filter(([type, value]) => Boolean(value))
                 .map(([type, value]) => `${value}:${type}`);
             return propertyProfiles.join(".");
