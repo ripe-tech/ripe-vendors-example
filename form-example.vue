@@ -201,11 +201,6 @@ export const formExample = {
         __getInitialsText(group = null) {
             if (!group && this.groups?.length > 0) group = this.groups[0];
             return this.initialsText[group] || "";
-        },
-        __getLocale(key) {
-            let locale = this.$store.state.locale;
-            locale = LocaleMap[locale] || LocaleMap.en_us;
-            return locale[key];
         }
     }
 };
