@@ -8,9 +8,9 @@ const name = path.parse(__dirname).name;
 const version = info.version;
 
 module.exports = (env, argv) => {
-    const fileSuffix = argv.deployment === "serverless" ? "?[hash]" : "";
+    const fileSuffix = process.env.DEPLOYMENT === "serverless" ? "?[hash]" : "";
     const publicPath = `${
-        argv.deployment === "serverless" ? "@@PUBLIC_PATH@@" : `/plugins/${name}`
+        process.env.DEPLOYMENT === "serverless" ? "@@PUBLIC_PATH@@" : `/plugins/${name}`
     }`;
     return {
         entry: path.resolve(__dirname, "index.js"),
@@ -62,20 +62,21 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.(jpg|png|svg)$/,
-                    loader: "file-loader",
-                    options: {
-                        name: `[path][name].[ext]${fileSuffix}`,
-                        publicPath: publicPath,
-                        esModule: false
+                    type: "asset/resource",
+                    generator: {
+                        filename: () => {
+                            return `[path][name][ext]?${fileSuffix}`;
+                        },
+                        publicPath: publicPath
                     }
                 },
                 {
                     test: /plugin\.json$/,
-                    loader: "file-loader",
-                    type: "javascript/auto",
-                    options: {
-                        name: `[name].[ext]${fileSuffix}`,
-                        esModule: false
+                    type: "asset/resource",
+                    generator: {
+                        filename: () => {
+                            return `[name][ext]?${fileSuffix}`;
+                        }
                     }
                 }
             ]
