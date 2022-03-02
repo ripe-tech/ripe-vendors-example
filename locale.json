@@ -1,0 +1,11 @@
+{
+    "en_us": {
+        "hello_world": "Hello world"
+    },
+    "pt_pt": {
+        "hello_world": "Olá mundo"
+    },
+    "fr_fr": {
+        "hello_world": "Bonjour le monde"
+    }
+}
