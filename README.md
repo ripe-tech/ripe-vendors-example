@@ -27,3 +27,8 @@ Simple example repository to be used as skeleton.
 
 **In the browser**
 - Use `features=<brand-side>`
+
+
+## Release
+
+- Run `npm run build-cdn`

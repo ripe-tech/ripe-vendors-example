@@ -9,8 +9,11 @@ const version = info.version;
 
 module.exports = (env, argv) => {
     const fileSuffix = process.env.DEPLOYMENT === "serverless" ? "?[hash]" : "";
+    const publicUrl = process.env.PUBLIC_URL;
     const publicPath = `${
-        process.env.DEPLOYMENT === "serverless" ? "@@PUBLIC_PATH@@" : `/plugins/${name}`
+        process.env.DEPLOYMENT === "serverless"
+            ? publicUrl || "@@PUBLIC_PATH@@"
+            : `/plugins/${name}`
     }`;
     return {
         entry: path.resolve(__dirname, "index.js"),
@@ -69,6 +72,10 @@ module.exports = (env, argv) => {
                         },
                         publicPath: publicPath
                     }
+                },
+                {
+                    resourceQuery: /raw/,
+                    type: "asset/source"
                 },
                 {
                     test: /plugin\.json$/,
