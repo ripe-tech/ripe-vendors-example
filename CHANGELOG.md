@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* 
+* Added npm script for building the package for CDN - [ripe-white/#974](https://github.com/ripe-tech/ripe-white/issues/974)
 
 ### Changed
 
