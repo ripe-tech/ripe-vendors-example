@@ -21,7 +21,7 @@
         "build-dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --mode development",
         "build-dev-serverless": "cross-env NODE_ENV=development DEPLOYMENT=serverless webpack --config webpack.config.js --mode development",
         "build-serverless": "cross-env NODE_ENV=production DEPLOYMENT=serverless webpack --config webpack.config.js --mode production",
-        "build-cdn": "cross-env NODE_ENV=production DEPLOYMENT=serverless PUBLIC_URL=\"https://cdn.platforme.com/ripe/ripe_commons/plugins/$npm_package_shortName/$npm_package_version\" webpack --config webpack.config.js --mode production",
+        "build-cdn": "cross-env NODE_ENV=production DEPLOYMENT=serverless PUBLIC_URL=\"https://cdn.platforme.com/ripe/ripe_commons/plugins/$npm_package_shortName/$npm_package_version/\" webpack --config webpack.config.js --mode production",
         "build-static": "npm run build-serverless",
         "lint": "npm run lint:base && npm run lint:stylelint",
         "lint-fix": "npm run lint-fix:base && npm run lint-fix:stylelint",
