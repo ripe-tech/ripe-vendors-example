@@ -1,0 +1,15 @@
+name: Main Workflow
+on: [push]
+jobs:
+  build:
+    name: Build
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [12, 13, 14, 16]
+    runs-on: ubuntu-latest
+    container: node:${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v1
+      - run: node --version
+      - run: ./build.sh

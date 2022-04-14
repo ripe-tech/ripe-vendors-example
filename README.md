@@ -2,33 +2,53 @@
 
 Simple example repository to be used as skeleton.
 
-## Setup
-**In `ripe-vendors-example`**
-- Change the project folder name and replace `example` by the brand's name
-- Run `npm install`
-- Find and replace the word `example` in the whole project by the brand name in lowercase. Ex: `swear`
-- Find and replace the word `Example` in the whole project by the brand name capitalized. Ex: `Swear`
-- Rename all the files that have `example` to the brand's name
-- Run `npm link`
+## Build
 
-**In `ripe-white`**
-- Run `npm link ripe-commons-<brand>`
-- Update the file `ripe-white/js/main.js`:
-    - Comment the line with ` await loadRemotePlugins();`
-    - Comment the lines that are now unused (ripe-white doesn't allow unused code)
-    - After the line `SwitchTechnicalPlugin.register(pluginus.manager);` add `require("ripe-commons-<brand>").install();`
-
-## Development
-**In `ripe-vendors-example`**
-- Run `npm run watch`
-
-**In `ripe-white`**
-- Run `npm run dev`
-
-**In the browser**
-- Use `features=<brand-side>`
-
+```bash
+npm run build
+```
 
 ## Release
 
-- Run `npm run build-cdn`
+```bash
+npm run build-cdn
+```
+
+## RIPE White - Hot Reload
+
+To be able to use "hot reload" with [RIPE White](https://github.com/ripe-tech/ripe-white) use the following steps:
+
+```bash
+npm link
+npm run watch
+```
+
+On the RIPE white directory use `npm link` to link the plugin project.
+
+```bash
+npm link ripe-commons-diverge
+```
+
+Then add the following code to the [`main.js`](https://github.com/ripe-tech/ripe-white/blob/master/js/main.js) of RIPE White on the `onLoad()` function after the plugin register and comment `loadRemotePlugins()` function that loads the remote plugins to prevent override.
+
+```javascript
+require("ripe-commons-diverge").install();
+```
+
+The `main.js` file would look something like
+
+```javascript
+...
+    // await loadRemotePlugins();
+...
+    PartsTechnicalPlugin.register(pluginus.manager);
+    StatsTechnicalPlugin.register(pluginus.manager);
+
+    // linked plugins installation/registration
+    require("ripe-commons-diverge").install();
+...
+```
+
+### Deploy
+
+To create a new release, a new [tag must be created](https://git-scm.com/book/en/v2/Git-Basics-Tagging), to automatically trigger a GitHub action. 

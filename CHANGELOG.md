@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Added npm script for building the package for CDN - [ripe-white/#974](https://github.com/ripe-tech/ripe-white/issues/974)
+* Added workflow to create PR in `ripe-static` - [ripe-retail-vendors/#167](https://github.com/ripe-tech/ripe-retail-vendors/issues/167)
 
 ### Changed
 

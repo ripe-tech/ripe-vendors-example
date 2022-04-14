@@ -1,0 +1,18 @@
+name: Main Workflow
+on: [create]
+jobs:
+  build:
+    name: Automated PR
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [12, 13, 14, 16]
+    runs-on: ubuntu-latest
+    container: node:${{ matrix.node-version }}
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+      - run: node --version
+      - run: ./build.sh
+      - run: ./create_pr.sh
