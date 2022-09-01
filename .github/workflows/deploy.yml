@@ -1,0 +1,24 @@
+name: Deploy Workflow
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  build:
+    name: Deploy
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [14]
+    runs-on: ubuntu-latest
+    container: node:${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v1
+      - run: node --version
+      - run: |
+          curl https://raw.githubusercontent.com/ripe-tech/ripe-ci/master/release-plugin.sh --output release-plugin.sh
+          chmod +x release-plugin.sh
+          ./release-plugin.sh
+        env:
+          RIPE_USER: "ripe-admin"
+          RIPE_TOKEN: ${{ secrets.RIPE_ADMIN_TOKEN }}
